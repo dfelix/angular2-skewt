@@ -4,10 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { SkewtComponent }  from './skewt/skewt.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SkewtComponent
   ],
   imports: [
     BrowserModule,

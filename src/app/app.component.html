@@ -1,3 +1,9 @@
 <h1>
   {{title}}
 </h1>
+
+<app-skewt unit="kmh" [data]="chartData"></app-skewt>
+
+<button (click)="loadSounding1()">sounding 1</button>
+<button (click)="loadSounding2()">sounding 2</button>
+<button (click)="clear()">clear</button>
