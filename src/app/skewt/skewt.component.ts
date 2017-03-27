@@ -76,7 +76,6 @@ export class SkewtComponent implements AfterViewInit {
   }
 
   ngOnChanges(): void {
-    console.log("ngOnChanges");
     if (!this.data || !this.host) return;
     this.setup();
     this.buildSVG();
