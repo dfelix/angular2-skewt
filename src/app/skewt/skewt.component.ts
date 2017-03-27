@@ -1,6 +1,15 @@
 import { Component, AfterViewInit, OnChanges, Input, ViewChild, ElementRef } from '@angular/core';
 import * as D3 from 'd3';
 
+type sline = {
+    press: number;
+    hght: number;
+    temp: number;
+    dwpt: number;
+    wdir: number;
+    wspd: number;
+}
+
 @Component({
   selector: 'app-skewt',
   styles: [`
@@ -33,7 +42,7 @@ import * as D3 from 'd3';
 
 export class SkewtComponent implements AfterViewInit {
   @ViewChild('chart') private chartContainer: ElementRef;
-  @Input() private data: Array<any>;
+  @Input() private data: Array<sline>;
   @Input() private unit: string;
 
   private htmlElement: HTMLElement;
@@ -64,19 +73,20 @@ export class SkewtComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.htmlElement = this.chartContainer.nativeElement;
     this.host = D3.select(this.htmlElement);
-    //this.setup()
   }
 
   ngOnChanges(): void {
+    console.log("ngOnChanges");
     if (!this.data || !this.host) return;
     this.setup();
     this.buildSVG();
-    this.makeBarbTemplate();
     this.drawBackground();
+    this.makeBarbTemplate();
     this.plot(this.data);
   }
 
   onResize(event) {
+    if (!this.data || !this.host) return;
     this.setup();
     this.buildSVG();
     this.drawBackground();
@@ -205,7 +215,7 @@ export class SkewtComponent implements AfterViewInit {
     this.barbs.selectAll("use").remove(); //clear previous paths from barbs
 
     if (data.length == 0) return;
-
+    
     //obj to array cast - needs revistion
     var result = data.filter(function (d) { return (d.temp > -1000 && d.dwpt > -1000); });
     var lines = [];

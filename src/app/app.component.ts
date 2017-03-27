@@ -382,12 +382,13 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     // timeout to delay sounding load... 
     setTimeout(() => {
+      console.log("loading first sounding...");
       this.chartData = this.sounding1;
     }, 1000);
   }
 
   clear() {
-    console.log("clear");
+    this.chartData = [];
   }
 
   loadSounding1() {
